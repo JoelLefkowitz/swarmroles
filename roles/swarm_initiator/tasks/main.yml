@@ -1,0 +1,20 @@
+- name: Initalise swarm
+  command: docker swarm init --advertise-addr {{ inventory_hostname }}
+  register: result
+  failed_when:
+    - result.rc != 0
+    - '"This node is already part of a swarm" not in result.stderr'
+
+- name: Register manager token
+  command: docker swarm join-token manager -q
+  register: swarm_manager_token
+  
+- name: Register worker token
+  command: docker swarm join-token worker -q
+  register: swarm_worker_token
+
+- set_fact: 
+    swarm_join_addr: "{{ inventory_hostname }}:2377"
+    swarm_manager_token: "{{ swarm_manager_token.stdout }}"
+    swarm_worker_token: "{{ swarm_worker_token.stdout }}"
+

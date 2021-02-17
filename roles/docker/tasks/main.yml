@@ -1,0 +1,19 @@
+- name: Register Docker GPG
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Register Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu xenial stable
+    state: present
+
+- name: Install docker-ce
+  apt: 
+    update_cache: yes 
+    name: docker-ce 
+    state: latest
+
+- name: Install python docker-compose module
+  pip:
+    name: docker-compose

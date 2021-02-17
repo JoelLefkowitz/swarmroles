@@ -1,0 +1,36 @@
+- name: Install nginx
+  apt:
+    update_cache: yes
+    name: nginx
+    state: latest
+
+- name: Install snap
+  apt:
+    update_cache: yes
+    name: snapd
+    state: latest
+
+- name: Install core
+  command: snap install core
+
+- name: Refresh core
+  command: snap refresh core
+
+- name: Install certbot
+  command: snap install --classic certbot
+
+- name: Get certificates
+  command: certbot certonly -n --nginx --domains "{{ domains }}" --agree-tos --email joellefkowitz@hotmail.com
+  when: domains is defined
+
+- name: Throw error if domains is not defined
+  fail: 
+    msg: "Domains is not defined, skipping registration."
+  when: domains is not defined
+  ignore_errors: yes
+
+- name: Turn off nginx to free ports
+  command: nginx -s stop
+  failed_when:
+    - result.rc != 0
+    - '"This node is already part of a swarm" not in result.stderr'

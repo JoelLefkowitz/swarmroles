@@ -1,0 +1,14 @@
+- name: Install python
+  apt:
+    update_cache: yes
+    name: python3-pip
+    state: latest
+
+- name: Upgrade pip
+  pip: 
+    name: pip
+    state: forcereinstall
+
+- name: Install setuptools
+  pip:
+    name: setuptools
