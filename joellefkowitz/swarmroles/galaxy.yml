@@ -1,0 +1,16 @@
+namespace: joellefkowitz
+name: swarmroles
+version: 1.0.0
+readme: README.md
+authors:
+  - Joel Lefkowitz <joellefkowitz@hotmail.com>
+description: Roles for deploying a docker swarm
+license:
+  - GPL-2.0-or-later
+tags: []
+dependencies: {}
+repository: https://github.com/JoelLefkowitz/swarmroles
+documentation: https://github.com/JoelLefkowitz/swarmroles
+homepage: https://github.com/JoelLefkowitz/swarmroles
+issues: https://github.com/JoelLefkowitz/swarmroles/issues
+build_ignore: []
