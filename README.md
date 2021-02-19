@@ -21,6 +21,7 @@ Select the first member of the manager group and have them initiate a swarm and 
 
 ```yml
 - hosts: &swarm_initiator manager[0]
+  user: root
   vars: 
     - domains: example.com
   roles:
@@ -32,6 +33,7 @@ Register the first member of the manager group as the swarm_initiator and pass t
 
 ```yml
 - hosts: manager
+  user: root
   vars:
   - docker_username: joellefkowitz
   - pull_images:
@@ -50,6 +52,7 @@ Perform the same registration for all members of the worker group.
 
 ```yml
 - hosts: worker
+  user: root
   pre_tasks: *register_swarm_initiator
   roles:
     - role: joellefkowitz.swarmroles.swarm_worker
@@ -61,6 +64,7 @@ Have a manager deploy the swarm. Copy over the compose file and any environment 
 
 ```yml
 - hosts: *swarm_initiator
+  user: root
   vars:
     - stack_name: prod
     - compose_file: docker-compose.yml
