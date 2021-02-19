@@ -31,6 +31,4 @@
 
 - name: Turn off nginx to free ports
   command: nginx -s stop
-  failed_when:
-    - result.rc != 0
-    - '"This node is already part of a swarm" not in result.stderr'
+  ignore_errors: yes

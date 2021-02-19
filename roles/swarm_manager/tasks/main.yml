@@ -11,8 +11,6 @@
     password: "{{ lookup('env', 'DOCKER_ACCESS_TOKEN') }}"
   register: result
   when: docker_username is defined
-  failed_when:
-    - '"unauthorized: incorrect username or password" in result.stdout'
 
 # Force pull newer version of an image tag
 - name: Pull images
