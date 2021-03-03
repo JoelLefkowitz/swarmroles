@@ -24,7 +24,7 @@
   when: domains is defined
 
 - name: Throw error if domains is not defined
-  fail: 
+  fail:
     msg: "Domains is not defined, skipping registration."
   when: domains is not defined
   ignore_errors: yes

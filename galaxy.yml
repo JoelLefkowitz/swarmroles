@@ -16,9 +16,7 @@ dependencies: {}
 repository: &repo https://github.com/JoelLefkowitz/swarmroles
 issues: https://github.com/JoelLefkowitz/swarmroles/issues
 
-homepage: *repo 
-documentation: *repo 
+homepage: *repo
+documentation: *repo
 
-build_ignore: [
-  venv
-]
+build_ignore: [venv]

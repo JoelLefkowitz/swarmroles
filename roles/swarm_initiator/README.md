@@ -4,10 +4,10 @@ Initialises a docker swarm
 
 ## Extends
 
-* docker
+- docker
 
 ## Sets facts
 
-* swarm_join_addr
-* swarm_manager_token
-* swarm_worker_token
+- swarm_join_addr
+- swarm_manager_token
+- swarm_worker_token

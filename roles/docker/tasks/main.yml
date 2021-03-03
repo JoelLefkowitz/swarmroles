@@ -9,9 +9,9 @@
     state: present
 
 - name: Install docker-ce
-  apt: 
-    update_cache: yes 
-    name: docker-ce 
+  apt:
+    update_cache: yes
+    name: docker-ce
     state: latest
 
 - name: Install python docker-compose module

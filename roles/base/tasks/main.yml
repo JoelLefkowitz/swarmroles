@@ -5,7 +5,7 @@
     state: latest
 
 - name: Upgrade pip
-  pip: 
+  pip:
     name: pip
     state: forcereinstall
 

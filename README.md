@@ -24,7 +24,7 @@ Select the first member of the manager group and have them initiate a swarm and 
 ```yml
 - hosts: &swarm_initiator manager[0]
   user: root
-  vars: 
+  vars:
     - domains: example.com
   roles:
     - joellefkowitz.swarmroles.swarm_initiator
@@ -37,9 +37,9 @@ Register the first member of the manager group as the swarm_initiator and pass t
 - hosts: manager
   user: root
   vars:
-  - docker_username: joellefkowitz
-  - pull_images:
-    - joellefkowitz/example:0.1.0_prod
+    - docker_username: joellefkowitz
+    - pull_images:
+        - joellefkowitz/example:0.1.0_prod
   pre_tasks: &register_swarm_initiator
     - name: Fetch the swarm initiator host
       set_fact:
@@ -90,7 +90,7 @@ Installs the docker engine for Ubuntu
 
 #### Extends
 
-* base
+- base
 
 ---
 
@@ -100,13 +100,13 @@ Initialises a docker swarm
 
 #### Extends
 
-* docker
+- docker
 
 #### Sets facts
 
-* swarm_join_addr
-* swarm_manager_token
-* swarm_worker_token
+- swarm_join_addr
+- swarm_manager_token
+- swarm_worker_token
 
 ---
 
@@ -116,22 +116,22 @@ Joins a docker swarm as a manager and pulls a list of images.
 
 #### Extends
 
-* docker
+- docker
 
 #### Variables
 
-* swarm_join_addr
-* swarm_manager_token
-* docker_username
-* pull_images (List of strings)
+- swarm_join_addr
+- swarm_manager_token
+- docker_username
+- pull_images (List of strings)
 
 #### Environment
 
-* DOCKER_ACCESS_TOKEN
+- DOCKER_ACCESS_TOKEN
 
 #### Notes
 
-* Docker login will only be attempted when docker_username is defined
+- Docker login will only be attempted when docker_username is defined
 
 ---
 
@@ -141,12 +141,12 @@ Joins a docker swarm as a worker
 
 #### Extends
 
-* docker
+- docker
 
 #### Variables
 
-* swarm_join_addr
-* swarm_worker_token
+- swarm_join_addr
+- swarm_worker_token
 
 ---
 
@@ -156,14 +156,14 @@ Deploys a stack to a docker swarm
 
 #### Extends
 
-* docker
+- docker
 
 #### Variables
 
-* deploy_dir (Defaults to 'deploy')
-* compose_file
-* env_files (List of strings)
-* stack_name
+- deploy_dir (Defaults to 'deploy')
+- compose_file
+- env_files (List of strings)
+- stack_name
 
 ---
 
@@ -173,13 +173,13 @@ Performs certbot authentication
 
 #### Variables
 
-* domains (Space separated strings)
+- domains (Space separated strings)
 
 #### Notes
 
-* Certbot authentication will be skipped if domains is undefined
+- Certbot authentication will be skipped if domains is undefined
 
-* Nginx will be signalled to stop in order to reclaim ports. This will fail softly and be ignored.
+- Nginx will be signalled to stop in order to reclaim ports. This will fail softly and be ignored.
 
 ## Tests
 

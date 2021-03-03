@@ -4,9 +4,9 @@ Joins a docker swarm as a worker
 
 ## Extends
 
-* docker
+- docker
 
 ## Variables
 
-* swarm_join_addr
-* swarm_worker_token
+- swarm_join_addr
+- swarm_worker_token
