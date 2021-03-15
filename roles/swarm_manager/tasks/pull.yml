@@ -1,5 +1,5 @@
 - name: Log into DockerHub
-  community.general.docker_login:
+  community.docker.docker_login:
     username: "{{ docker_username }}"
     password: "{{ lookup('env', 'DOCKER_ACCESS_TOKEN') }}"
   register: result
@@ -7,7 +7,7 @@
 
 # Force pull newer version of an image tag
 - name: Pull images
-  community.general.docker_image:
+  community.docker.docker_image:
     name: "{{ item }}"
     source: pull
     force_source: yes
