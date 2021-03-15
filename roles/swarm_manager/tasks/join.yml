@@ -1,0 +1,6 @@
+- name: Join swarm as a manager
+  command: docker swarm join --token {{ swarm_manager_token }} {{ swarm_join_addr }}
+  register: result
+  failed_when:
+    - result.rc != 0
+    - '"This node is already part of a swarm" not in result.stderr'

@@ -1,22 +1,2 @@
-- name: Join swarm as a manager
-  command: docker swarm join --token {{ swarm_manager_token }} {{ swarm_join_addr }}
-  register: result
-  failed_when:
-    - result.rc != 0
-    - '"This node is already part of a swarm" not in result.stderr'
-
-- name: Log into DockerHub
-  community.general.docker_login:
-    username: "{{ docker_username }}"
-    password: "{{ lookup('env', 'DOCKER_ACCESS_TOKEN') }}"
-  register: result
-  when: docker_username is defined
-
-# Force pull newer version of an image tag
-- name: Pull images
-  community.general.docker_image:
-    name: "{{ item }}"
-    source: pull
-    force_source: yes
-  loop: "{{ pull_images }}"
-  when: pull_images is defined
+- include_tasks: join.yml
+- include_tasks: pull.yml

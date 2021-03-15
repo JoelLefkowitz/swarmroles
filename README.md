@@ -19,7 +19,7 @@ ansible-galaxy collection install joellefkowitz.swarmroles
 
 ## Motivating example
 
-Select the first member of the manager group and have them initiate a swarm and perform the certbot authentication.
+Select the first member of the manager group and have them initiate a swarm.
 
 ```yml
 - hosts: &swarm_initiator manager[0]
@@ -28,7 +28,6 @@ Select the first member of the manager group and have them initiate a swarm and 
     - domains: example.com
   roles:
     - joellefkowitz.swarmroles.swarm_initiator
-    - joellefkowitz.swarmroles.certbot
 ```
 
 Register the first member of the manager group as the swarm_initiator and pass the swarm tokens to the rest of the manager group. Provide a list of images to pull and a docker username if the images require a login for access. An access token can be issued under the environemnt variable name DOCKER_ACCESS_TOKEN.
@@ -40,10 +39,12 @@ Register the first member of the manager group as the swarm_initiator and pass t
     - docker_username: joellefkowitz
     - pull_images:
         - joellefkowitz/example:0.1.0_prod
+
   pre_tasks: &register_swarm_initiator
     - name: Fetch the swarm initiator host
       set_fact:
         swarm_initiator: "{{groups['manager'][0]}}"
+        
   roles:
     - role: joellefkowitz.swarmroles.swarm_manager
       swarm_join_addr: "{{ hostvars[swarm_initiator]['swarm_join_addr'] }}"
@@ -166,36 +167,6 @@ Deploys a stack to a docker swarm
 - stack_name
 
 ---
-
-### certbot
-
-Performs certbot authentication
-
-#### Variables
-
-- domains (Space separated strings)
-
-#### Notes
-
-- Certbot authentication will be skipped if domains is undefined
-
-- Nginx will be signalled to stop in order to reclaim ports. This will fail softly and be ignored.
-
-#### Explanation
-
-When deploying a webapp to a swarm I often have an nginx service that exposes an https endpoint. In the docker-compose file I bind the certificate on the swarm node to the service.
-
-```yml
-volumes:
-  - type: bind
-    source: /etc/letsencrypt/live/joellefkowitz.co.uk/fullchain.pem
-    target: /etc/nginx/joellefkowitz.co.uk.crt
-  - type: bind
-    source: /etc/letsencrypt/live/joellefkowitz.co.uk/privkey.pem
-    target: /etc/nginx/joellefkowitz.co.uk.key
-```
-
-So in the same way that pulling images and copying necessary files must happen on every manager node, we may also need to fetch certificates from an external source so that the services have everything they need in order to launch.
 
 ## Tests
 
