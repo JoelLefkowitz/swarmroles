@@ -44,7 +44,7 @@ Register the first member of the manager group as the swarm_initiator and pass t
     - name: Fetch the swarm initiator host
       set_fact:
         swarm_initiator: "{{groups['manager'][0]}}"
-        
+
   roles:
     - role: joellefkowitz.swarmroles.swarm_manager
       swarm_join_addr: "{{ hostvars[swarm_initiator]['swarm_join_addr'] }}"
@@ -97,7 +97,7 @@ Installs the docker engine for Ubuntu
 
 ### swarm_initiator
 
-Initialises a docker swarm
+Initializes a docker swarm
 
 #### Extends
 

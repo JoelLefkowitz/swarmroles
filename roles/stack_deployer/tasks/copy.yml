@@ -1,0 +1,10 @@
+- name: Copy compose file 
+  copy:
+    src: "{{ compose_file }}"
+    dest: "{{ deploy_dir }}/{{ compose_file }}"
+
+- name: Copy environment variables files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ deploy_dir }}/{{ item }}"
+  loop: "{{ env_files }}"

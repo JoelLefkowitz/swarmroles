@@ -1,2 +1,5 @@
-- include_tasks: join.yml
-- include_tasks: pull.yml
+- name: Join swarm
+  include_tasks: join.yml
+
+- name: Pull images
+  include_tasks: pull.yml

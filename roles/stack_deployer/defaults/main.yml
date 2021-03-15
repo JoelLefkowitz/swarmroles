@@ -1,2 +1,5 @@
+compose_file: docker-compose.yml
+copy_deploy_files: false
 deploy_dir: deploy
-env_files:
+env_files: []
+stack_name: stack

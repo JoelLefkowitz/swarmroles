@@ -1,0 +1,4 @@
+- name: Deploy the stack
+  command: docker stack deploy "{{ stack_name }}" -c "{{ compose_file }}"
+  args:
+    chdir: "{{ deploy_dir }}"

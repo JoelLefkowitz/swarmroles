@@ -1,6 +1,6 @@
 # Swarm initiator
 
-Initialises a docker swarm
+Initializes a docker swarm
 
 ## Extends
 

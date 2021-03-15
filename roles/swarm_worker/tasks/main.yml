@@ -1,6 +1,2 @@
-- name: Join swarm as a worker
-  command: docker swarm join --token {{ swarm_worker_token }} {{ swarm_join_addr }}
-  register: result
-  failed_when:
-    - result.rc != 0
-    - '"This node is already part of a swarm" not in result.stderr'
+- name: Join swarm
+  include_tasks: join.yml
