@@ -41,7 +41,7 @@ publisher = "PyPI"
 languages = ["Python"]
 frameworks = []
 paradigms = []
-lifecycle = ""
+lifecycle = "Alpha"
 
 [tool.thx.jobs]
 lint = ["npx cspell . --dot --gitignore", "trufflehog3"]
