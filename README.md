@@ -68,79 +68,79 @@ Have a manager deploy the swarm. Copy over the compose file and any environment 
     - joellefkowitz.swarmroles.stack_deployer
 ```
 
-## Roles
+### Roles
 
-### base
+#### base
 
 Installs python and setuptools
 
-### docker
+#### docker
 
 Installs the docker engine for Ubuntu
 
-#### Extends
+##### Extends
 
 - base
 
-### swarm_initiator
+#### swarm_initiator
 
 Initializes a docker swarm
 
-#### Extends
+##### Extends
 
 - docker
 
-#### Sets facts
+##### Sets facts
 
 - swarm_join_addr
 - swarm_manager_token
 - swarm_worker_token
 
-### swarm_manager
+#### swarm_manager
 
 Joins a docker swarm as a manager and pulls a list of images.
 
-#### Extends
+##### Extends
 
 - docker
 
-#### Variables
+##### Variables
 
 - swarm_join_addr
 - swarm_manager_token
 - docker_username
 - pull_images (List of strings)
 
-#### Environment
+##### Environment
 
 - DOCKER_ACCESS_TOKEN
 
-#### Notes
+##### Notes
 
 - Docker login will only be attempted when docker_username is defined
 
-### swarm_worker
+#### swarm_worker
 
 Joins a docker swarm as a worker
 
-#### Extends
+##### Extends
 
 - docker
 
-#### Variables
+##### Variables
 
 - swarm_join_addr
 - swarm_worker_token
 
-### stack_deployer
+#### stack_deployer
 
 Deploys a stack to a docker swarm
 
-#### Extends
+##### Extends
 
 - docker
 
-#### Variables
+##### Variables
 
 - deploy_dir (Defaults to 'deploy')
 - compose_file
