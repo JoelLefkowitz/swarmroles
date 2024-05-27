@@ -1,0 +1,49 @@
+ [project]
+name = "swarmroles"
+description = "Ansible roles for deploying a docker swarm."
+version = "1.4.0"
+
+keywords = ["ansible", "roles", "certbot"]
+
+[project.optional-dependencies]
+all = [
+    "bump2version==1.0.1",
+    "furo==2024.1.29",
+    "matplotlib==3.8.4",
+    "myst-parser==2.0.0",
+    "sphinx-autoapi==3.0.0",
+    "Sphinx==7.2.6",
+    "sphinxext-opengraph==0.9.1",
+    "thx==0.5.1",
+    "trufflehog3==3.0.7",
+    "walkmate~=1.5.0",
+]
+
+[project.license]
+name = "MIT"
+file = "LICENSE.md"
+content-type = "text/markdown"
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.urls]
+repository = "https://github.com/JoelLefkowitz/swarmroles"
+homepage = "https://joellefkowitz.github.io/swarmroles"
+
+[[project.authors]]
+name = "Joel Lefkowitz"
+email = "joellefkowitz@hotmail.com"
+
+[tool.metadata]
+publisher = "PyPI"
+languages = ["Python"]
+frameworks = []
+paradigms = []
+lifecycle = ""
+
+[tool.thx.jobs]
+lint = ["npx cspell . --dot --gitignore", "trufflehog3"]
+format = "npx prettier . --write"
+docs = "sphinx-build docs/sphinx docs/dist"

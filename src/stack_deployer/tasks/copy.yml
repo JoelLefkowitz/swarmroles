@@ -1,4 +1,4 @@
-- name: Copy compose file 
+- name: Copy compose file
   copy:
     src: "{{ compose_file }}"
     dest: "{{ deploy_dir }}/{{ compose_file }}"

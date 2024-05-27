@@ -1,2 +1,2 @@
-- name: Initalize the swarm
+- name: Initialize the swarm
   include_tasks: initialize.yml

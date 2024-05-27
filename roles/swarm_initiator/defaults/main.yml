@@ -1,1 +1,0 @@
-advertise_addr: "{{ inventory_hostname }}"
