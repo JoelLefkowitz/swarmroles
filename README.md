@@ -2,22 +2,13 @@
 
 Ansible roles for deploying a docker swarm.
 
-## Status
+![Review](https://img.shields.io/github/actions/workflow/status/JoelLefkowitz/swarmroles/review.yml)
 
-| Source     | Shields                                                                                                            |
-| ---------- | ------------------------------------------------------------------------------------------------------------------ |
-| Project    | ![release][release_shield] ![license][license_shield] ![dependents][dependents_shield]                             |
-| Health     | ![travis][travis_shield] ![codacy][codacy_shield] ![coverage][coverage_shield] ![readthedocs][readthedocs_shield]  |
-| Repository | ![issues][issues_shield] ![pulls][pulls_shield]                                                                    |
-| Activity   | ![contributors][contributors_shield] ![monthly_commits][monthly_commits_shield] ![last_commit][last_commit_shield] |
+## Documentation
 
-## Installation
+Documentation and more detailed examples are hosted on [Github Pages](https://joellefkowitz.github.io/swarmroles).
 
-```bash
-ansible-galaxy collection install joellefkowitz.swarmroles
-```
-
-## Motivating example
+## Usage
 
 Select the first member of the manager group and have them initiate a swarm.
 
@@ -30,7 +21,7 @@ Select the first member of the manager group and have them initiate a swarm.
     - joellefkowitz.swarmroles.swarm_initiator
 ```
 
-Register the first member of the manager group as the swarm_initiator and pass the swarm tokens to the rest of the manager group. Provide a list of images to pull and a docker username if the images require a login for access. An access token can be issued under the environemnt variable name DOCKER_ACCESS_TOKEN.
+Register the first member of the manager group as the swarm_initiator and pass the swarm tokens to the rest of the manager group. Provide a list of images to pull and a docker username if the images require a login for access. An access token can be issued under the environment variable name DOCKER_ACCESS_TOKEN.
 
 ```yml
 - hosts: manager
@@ -77,218 +68,150 @@ Have a manager deploy the swarm. Copy over the compose file and any environment 
     - joellefkowitz.swarmroles.stack_deployer
 ```
 
-## Roles
+### Roles
 
-### base
+#### base
 
 Installs python and setuptools
 
----
-
-### docker
+#### docker
 
 Installs the docker engine for Ubuntu
 
-#### Extends
+##### Extends
 
 - base
 
----
-
-### swarm_initiator
+#### swarm_initiator
 
 Initializes a docker swarm
 
-#### Extends
+##### Extends
 
 - docker
 
-#### Sets facts
+##### Sets facts
 
 - swarm_join_addr
 - swarm_manager_token
 - swarm_worker_token
 
----
-
-### swarm_manager
+#### swarm_manager
 
 Joins a docker swarm as a manager and pulls a list of images.
 
-#### Extends
+##### Extends
 
 - docker
 
-#### Variables
+##### Variables
 
 - swarm_join_addr
 - swarm_manager_token
 - docker_username
 - pull_images (List of strings)
 
-#### Environment
+##### Environment
 
 - DOCKER_ACCESS_TOKEN
 
-#### Notes
+##### Notes
 
 - Docker login will only be attempted when docker_username is defined
 
----
-
-### swarm_worker
+#### swarm_worker
 
 Joins a docker swarm as a worker
 
-#### Extends
+##### Extends
 
 - docker
 
-#### Variables
+##### Variables
 
 - swarm_join_addr
 - swarm_worker_token
 
----
-
-### stack_deployer
+#### stack_deployer
 
 Deploys a stack to a docker swarm
 
-#### Extends
+##### Extends
 
 - docker
 
-#### Variables
+##### Variables
 
 - deploy_dir (Defaults to 'deploy')
 - compose_file
 - env_files (List of strings)
 - stack_name
 
----
-
-## Tests
-
-To run unit tests:
-
-```bash
-grunt tests:unit
-```
-
-To generate a coverage report:
-
-```bash
-grunt tests:coverage
-```
-
-## Documentation
-
-This repository's documentation is hosted on [readthedocs][readthedocs].
-
-To generate the sphinx configuration:
-
-```bash
-grunt docs:generate
-```
-
-Then build the documentation:
-
-```bash
-grunt docs:build
-```
-
 ## Tooling
+
+### Dependencies
+
+To install dependencies:
+
+```bash
+yarn install
+pip install .[all]
+```
+
+### Tests
+
+To run tests:
+
+```bash
+thx test
+```
+
+### Documentation
+
+To generate the documentation locally:
+
+```bash
+thx docs
+```
+
+### Linters
 
 To run linters:
 
 ```bash
-grunt lint
+thx lint
 ```
+
+### Formatters
 
 To run formatters:
 
 ```bash
-grunt format
+thx format
 ```
 
-Before commiting new code:
+## Contributing
 
-```bash
-grunt precommit
-```
+Please read this repository's [Code of Conduct](CODE_OF_CONDUCT.md) which outlines our collaboration standards and the [Changelog](CHANGELOG.md) for details on breaking changes that have been made.
 
-This will run linters, formaters, generate a test coverage report and the sphinx configuration.
+This repository adheres to semantic versioning standards. For more information on semantic versioning visit [SemVer](https://semver.org).
 
-## Versioning
-
-This repository adheres to semantic versioning standards.
-For more inforamtion on semantic versioning visit [SemVer][semver].
-
-Bump2version is used to version and tag changes.
-For example:
+Bump2version is used to version and tag changes. For example:
 
 ```bash
 bump2version patch
 ```
 
-## Changelog
+### Contributors
 
-Please read this repository's [CHANGELOG](CHANGELOG.md) for details on changes that have been made.
-
-## Contributing
-
-Please read this repository's guidelines on [CONTRIBUTING](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
-## Contributors
-
-- **Joel Lefkowitz** - _Initial work_ - [Joel Lefkowitz][joellefkowitz]
-
-[![Buy Me A Coffee][coffee_button]][coffee]
+- [Joel Lefkowitz](https://github.com/joellefkowitz) - Initial work
 
 ## Remarks
 
 Lots of love to the open source community!
 
-![Be kind][be_kind]
-
-<!-- Github links -->
-
-[pulls]: https://github.com/JoelLefkowitz/swarmroles/pulls
-[issues]: https://github.com/JoelLefkowitz/swarmroles/issues
-
-<!-- External links -->
-
-[readthedocs]: https://swarmroles.readthedocs.io/en/latest/
-[semver]: http://semver.org/
-[coffee]: https://www.buymeacoffee.com/joellefkowitz
-[coffee_button]: https://cdn.buymeacoffee.com/buttons/default-blue.png
-[be_kind]: https://media.giphy.com/media/osAcIGTSyeovPq6Xph/giphy.gif
-
-<!-- Acknowledgments -->
-
-[joellefkowitz]: https://github.com/JoelLefkowitz
-
-<!-- Project shields -->
-
-[release_shield]: https://img.shields.io/github/v/tag/joellefkowitz/swarmroles
-[license_shield]: https://img.shields.io/github/license/joellefkowitz/swarmroles
-[dependents_shield]: https://img.shields.io/librariesio/dependent-repos/pypi/swarmroles
-
-<!-- Health shields -->
-
-[travis_shield]: https://img.shields.io/travis/joellefkowitz/swarmroles
-[codacy_shield]: https://img.shields.io/codacy/coverage/swarmroles
-[coverage_shield]: https://img.shields.io/codacy/grade/swarmroles
-[readthedocs_shield]: https://img.shields.io/readthedocs/swarmroles
-
-<!-- Repository shields -->
-
-[issues_shield]: https://img.shields.io/github/issues/joellefkowitz/swarmroles
-[pulls_shield]: https://img.shields.io/github/issues-pr/joellefkowitz/swarmroles
-
-<!-- Activity shields -->
-
-[contributors_shield]: https://img.shields.io/github/contributors/joellefkowitz/swarmroles
-[monthly_commits_shield]: https://img.shields.io/github/commit-activity/m/joellefkowitz/swarmroles
-[last_commit_shield]: https://img.shields.io/github/last-commit/joellefkowitz/swarmroles
+<div align='center'>
+    <img width=200 height=200 src='https://media.giphy.com/media/osAcIGTSyeovPq6Xph/giphy.gif' alt='Be kind to your mind' />
+    <img width=200 height=200 src='https://media.giphy.com/media/KEAAbQ5clGWJwuJuZB/giphy.gif' alt='Love each other' />
+    <img width=200 height=200 src='https://media.giphy.com/media/WRWykrFkxJA6JJuTvc/giphy.gif' alt="It's ok to have a bad day" />
+</div>

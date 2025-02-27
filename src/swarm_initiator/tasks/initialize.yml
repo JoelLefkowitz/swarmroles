@@ -1,4 +1,4 @@
-- name: Initalize the swarm
+- name: Initialize the swarm
   command: docker swarm init --advertise-addr {{ advertise_addr }}
   register: result
   failed_when:

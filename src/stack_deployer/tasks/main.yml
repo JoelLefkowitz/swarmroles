@@ -2,10 +2,10 @@
   file:
     path: "{{ deploy_dir }}"
     state: directory
-    
-- name: Copy compose and environment variables files 
+
+- name: Copy compose and environment variables files
   include_tasks: copy.yml
   when: "{{ copy_deploy_files }}"
 
-- name: Deploy the stack 
+- name: Deploy the stack
   include_tasks: deploy.yml
