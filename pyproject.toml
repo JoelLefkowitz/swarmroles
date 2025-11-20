@@ -37,8 +37,7 @@ name = "Joel Lefkowitz"
 email = "joellefkowitz@hotmail.com"
 
 [tool.metadata]
-publisher = "PyPI"
-languages = ["Python"]
+languages = ["YAML"]
 frameworks = []
 paradigms = []
 lifecycle = "Alpha"
